@@ -1,0 +1,39 @@
+<% include ../partials/header.ejs %>
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-8">
+            <h1>Welcome to the <%= title %> List Page!</h1>
+            <table class="table table-bordered table-striped table-hover">
+                <a href="/books/add" class="btn btn-primary"><i class="far fa-plus-square"></i> Add a New Book Record</a>
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Author</th>
+                    <th class="text-center">Published</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+                <% 
+                for(let count =0; count<BookList.length;count++)
+                {%>
+                    <tr>
+                        <td class="text-center"><%=BookList[count].name %></td>
+                        <td class="text-center"><%=BookList[count].author %></td>
+                        <td class="text-center"><%=BookList[count].published %></td>
+                        <td class="text-center"><%=BookList[count].description %></td>
+                        <td class="text-center">$<%=BookList[count].price %></td>
+                        <td class="text-center "><a href="/books/edit/<%=BookList[count]._id %>" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a></td>
+                        <td class="text-center "><a href="/books/delete/<%=BookList[count]._id %>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                    </tr>
+                <%}
+                %> 
+            </table>
+        </div>
+    </div>
+</main>
+
+
+
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,37 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+            <h1><%=title%></h1>
+            <form method="POST" class="form">
+                <div class="form-group">
+                    <label for="nameTxt">Name</label>
+                    <input type="text" class="form-control" name="name" id="nameTxt" placeholder="Enter the Book Title" required autocomplete="off" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="authorTxt">Author</label>
+                    <input type="text" class="form-control" name="author" id="authorTxt" placeholder="Enter the Book Author" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="publishDate">Publication Date</label>
+                    <input type="text" class="form-control" name="published" id="publishDate" placeholder="Enter the Book's Pulication Date" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="description" id="description" cols="10" rows="5" placeholder="Enter a Description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" name="price" id="price" placeholder="Enter the Book Price" required autocomplete="off">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Complete</button>
+                <button type="reset" class="btn btn-secondary">Reset Form</button>
+                <a href="/books" class="btn btn-success">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<% include ../partials/footer.ejs %>

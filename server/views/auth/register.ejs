@@ -1,0 +1,49 @@
+<% include ../partials/header.ejs %>
+
+    <main class="container">
+        <% 
+            if(messages.length > 0)
+            {%>
+                <div class="alert alert-danger">
+                    <%=messages%>    
+                </div>
+            <%}    
+        %> 
+        <div class="row">
+            <div class="offset-md-4 col-md-4">
+                <h1>Please Register</h1>
+                <form method="POST" autocomplete="off">
+                    <fieldset class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username" autocomplete="off" autofocus required>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" autocomplete="off" autofocus required>
+                        
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Enter email address" autocomplete="off" autofocus required>
+                        
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="displayName">Display Name:</label>
+                        <input type="text" name="displayName" id="displayName" class="form-control" placeholder="Enter displayName" autocomplete="off" autofocus required>
+                        
+                    </fieldset>
+                    
+                    <fieldset class="form-group text-right">
+                        <input type="submit" class="btn btn-success" value="Register">
+                        <a href="/">
+                            <input type="button" class="btn btn-warning" value="Cancel">    
+                        </a>
+                    </fieldset>
+                </form>    
+            </div>
+        </div>
+    </main>
+
+<% include ../partials/footer.ejs %>

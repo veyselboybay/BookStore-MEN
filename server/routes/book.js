@@ -2,6 +2,19 @@ let express = require('express')
 let router = express.Router();
 let mongoose = require('mongoose');
 
+let passport = require('passport');
+
+// Helper function for guard purposes
+
+function requireAuth(req,res,next)
+{
+    if(!req.isAuthenticated())
+    {
+        return res.redirect('/login');
+    }
+    next();
+}
+
 let Book =require('../models/book');
 
 router.get('/',(req,res,next) => {
@@ -18,13 +31,13 @@ router.get('/',(req,res,next) => {
 })
 
 // GET ADD PAGE
-router.get('/add',(req,res,next) => {
+router.get('/add',requireAuth,(req,res,next) => {
 
     res.render('book/add',{title:'Add Book'});
 })
 
 // PROCESS EDIT PAGE
-router.post('/add',(req,res,next) => {
+router.post('/add',requireAuth,(req,res,next) => {
     
     let newBook= Book({
         "name":req.body.name,
@@ -49,7 +62,7 @@ router.post('/add',(req,res,next) => {
 
 //GET EDIT PAGE
 
-router.get('/edit/:id',(req,res,next) => {
+router.get('/edit/:id',requireAuth,(req,res,next) => {
     let id=req.params.id;
     Book.findById(id,(err,editBook) => {
         if(err)
@@ -66,7 +79,7 @@ router.get('/edit/:id',(req,res,next) => {
 
 //PROCESS EDIT PAGE
 
-router.post('/edit/:id',(req,res,next) => {
+router.post('/edit/:id',requireAuth,(req,res,next) => {
     let id=req.params.id;
 
     let updatedBook= Book({
@@ -93,7 +106,7 @@ router.post('/edit/:id',(req,res,next) => {
 
 //DELETING A BOOK RECORD
 
-router.get('/delete/:id',(req,res,next) => {
+router.get('/delete/:id',requireAuth,(req,res,next) => {
     let id=req.params.id;
 
     Book.remove({_id:id},(err) => {

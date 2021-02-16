@@ -10,6 +10,15 @@ let bookRouter = require('../routes/book');
 
 let app = express();
 
+
+// Modules for authentication
+
+let session = require('express-session');
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
+
 // Set up MongoDB
 
 let mongoose = require('mongoose');
@@ -33,6 +42,32 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
+
+// Set up express session
+app.use(session({
+  secret:"SomeSecret",
+  saveUninitialized:false,
+  resave:false
+}));
+
+// Set up flash
+
+app.use(flash());
+
+//Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport user config
+
+//create a user model instance
+let userModel = require('../models/user');
+let User = userModel.User;
+passport.use(User.createStrategy());
+
+// serialize and deserialize the user info
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

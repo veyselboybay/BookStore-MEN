@@ -25,7 +25,7 @@ router.get('/',(req,res,next) => {
         }
         else
         {
-            res.render('book/list',{title:'Books',BookList:bookList});
+            res.render('book/list',{title:'Books',BookList:bookList,displayName:req.user?req.user.displayName:''});
         }
     })
 })
@@ -33,7 +33,7 @@ router.get('/',(req,res,next) => {
 // GET ADD PAGE
 router.get('/add',requireAuth,(req,res,next) => {
 
-    res.render('book/add',{title:'Add Book'});
+    res.render('book/add',{title:'Add Book',displayName:req.user?req.user.displayName:''});
 })
 
 // PROCESS EDIT PAGE
@@ -72,7 +72,7 @@ router.get('/edit/:id',requireAuth,(req,res,next) => {
         }
         else
         {
-            res.render('book/edit',{title:'Edit Book',book:editBook});
+            res.render('book/edit',{title:'Edit Book',book:editBook,displayName:req.user?req.user.displayName:''});
         }
     })
 })

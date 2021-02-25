@@ -1,5 +1,5 @@
 {
-  "name": "mongoexpressnode",
+  "name": "mean-bookstore",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -43,5 +43,17 @@
     "@types/passport-jwt": "^3.0.5",
     "@types/passport-local": "^1.0.33",
     "@types/passport-local-mongoose": "^4.0.13"
-  }
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veyselboybay/MEAN-BOOKSTORE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veyselboybay/MEAN-BOOKSTORE/issues"
+  },
+  "homepage": "https://github.com/veyselboybay/MEAN-BOOKSTORE#readme",
+  "description": ""
 }

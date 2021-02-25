@@ -2,9 +2,13 @@ var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 let passport = require('passport');
+let jwt = require('jsonwebtoken');
+let DB = require('../config/db');
 
 let userModel = require('../models/user');
 let User = userModel.User;
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -71,6 +75,27 @@ router.post('/login',(req,res,next) => {
       {
         return next(err);
       }
+      const payload =
+      {
+        id:user._id,
+        displayName:user.displayName,
+        username:user.username,
+        email:user.email
+      }
+
+      const authToken = jwt.sign(payload,DB.Secret,{expiresIn:604800});
+      /* --WE WILL ENABLE THIS PART WHEN WE ARE DONE WITH ANGULAR PART.--
+      res.json({
+        success:true,
+        messages:'User Logged in Sucessfully!',
+        user:{
+          id:user._id,
+          displayName:user.displayName,
+          username:user.username,
+          email:user.email
+        },token:authToken
+      });
+      */
       return res.redirect('/books');
     })
 

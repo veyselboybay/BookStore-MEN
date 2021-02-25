@@ -69,6 +69,31 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Authentication with JWT Configuration
+let cors=require('cors');
+let passportJWT=require('passport-jwt');
+let JWTStrategy = passportJWT.Strategy;
+let ExtractJWT = passportJWT.ExtractJwt;
+
+let jwtOptions = { };
+jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = DB.Secret;
+
+app.use(cors());
+
+let strategy = new JWTStrategy(jwtOptions,(jwt_payload,done) => {
+  User.findById(jwt_payload.id)
+  .then(user => {
+    return done(null,user);
+  })
+  .catch(err => {
+    return done(err,false);
+  });
+})
+
+passport.use(strategy);
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/books',bookRouter);
